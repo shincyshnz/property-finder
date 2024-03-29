@@ -32,7 +32,15 @@ const propertySchema = new mongoose.Schema({
         type : Date,
         default : Date.now,
     },
+    locationUrl : {
+        type : String,
+        trim : true,
+    },
     location : {
+        type : String,
+        trim : true,
+    },
+    building : {
         type : String,
         trim : true,
     },
