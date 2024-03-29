@@ -3,6 +3,7 @@ const connectDb = require("./config/db");
 const cors = require('cors');
 const authRoutes = require("./routes/authRoutes");
 const propertyRoutes = require("./routes/propertyRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 3050;
@@ -21,6 +22,8 @@ app.use(express.json());
 app.use("/auth", authRoutes);
 // property routes
 app.use("/property", propertyRoutes);
+// user routes
+app.use("/users", userRoutes);
 
 // Wildcard matching routes
 app.use("*", (err, req, res, next)=>{
