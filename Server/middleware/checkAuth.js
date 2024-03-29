@@ -1,9 +1,9 @@
 const jwt = require("jsonwebtoken");
-const {userModel, UserModel} = require("../models/userModel");
+const { UserModel } = require("../models/userModel");
 
 const checkAuth = async(req, res, next)=>{
     const token = req.headers.authorization?.split(' ')[1];
-
+    
     if(!token){
         return res.status(401).json({
             message : "Authentication failed"
@@ -18,7 +18,6 @@ const checkAuth = async(req, res, next)=>{
         }
 
         // appending user details to the request object
-        console.log(user);
         req.user = user;
         next();
     } catch (error) {
