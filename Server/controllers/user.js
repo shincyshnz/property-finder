@@ -26,7 +26,7 @@ const searchProperties = async(req, res, next) => {
     const { search : searchString } = req.query;
 
     try {
-        const
+        
     } catch (error) {
         next(error);
     }
