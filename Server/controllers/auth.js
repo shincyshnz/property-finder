@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const { UserModel } = require("../models/userModel");
 const { generatePasswordHash, comparePasswordHash } = require("../utils/bcrypt");
+const { generateAccessToken } = require("../utils/jwt");
 
 // Register User
 const register = async (req, res, next) => {
@@ -44,10 +45,8 @@ const login = async (req, res, next) => {
        }
 
        // Generate JWT Token
-       const token = jwt.sign({userId : user._id}, process.env.SECRET_KEY, {
-        expiresIn : '1h'
-       });
-       res.status(200).json({ token });
+        const token = generateAccessToken(user._id);
+        res.status(200).json({ token });
 
     } catch (error) {
         next(error);

@@ -5,6 +5,10 @@ const propertySchema = new mongoose.Schema({
         type : String,
         trim : true,
     },
+    title : {
+        type : String,
+        trim : true,
+    },
     propertyType : {
         type : mongoose.Schema.Types.ObjectId,
         ref : "PropertyTypes",
@@ -30,6 +34,7 @@ const propertySchema = new mongoose.Schema({
     },
     location : {
         type : String,
+        trim : true,
     },
     amenities : [{
         type : mongoose.Schema.Types.ObjectId,
@@ -39,7 +44,7 @@ const propertySchema = new mongoose.Schema({
         type : String, 
     }],
     price :{
-        type : Number,
+        type : String,
     },
     completeionStatus : {
         type : String,
@@ -48,6 +53,10 @@ const propertySchema = new mongoose.Schema({
     propertyTag : {
         type : String,
         enum : ['rent', 'buy', 'new project', 'commercial'],
+    },
+    builder : {
+        type : String,
+        trim : true,
     }
 }, {timestamps : true} );
 

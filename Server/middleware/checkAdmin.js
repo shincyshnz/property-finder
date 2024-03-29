@@ -1,4 +1,3 @@
-const jwt = require("jsonwebtoken");
 const {userModel, UserModel} = require("../models/userModel");
 
 const checkAdmin = (req, res, next)=>{

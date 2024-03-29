@@ -1,4 +1,6 @@
+const mongoose = require("mongoose");
 const { AmenitiesModel } = require("../models/amenitiesModel");
+const { PropertyModel } = require("../models/propertyModel");
 const { PropertyTypesModel } = require("../models/propertyTypesModel");
 
 // ------------------ Handling Property types -------------------
@@ -30,39 +32,118 @@ const createAmenities = async (req, res, next)=>{
 };
 
 // ------------------ Handling Properties -------------------
-const getProperties = async ()=>{
-    
+const getAllProperties = async (req, res, next)=>{
+    const resultsPerPage = process.env.RESULTS_PER_PAGE;
+    const { page } = req.query; // starts from 0
+
+    try {
+        const totalResults = await PropertyModel.find().count();
+        const propertyDetails = await PropertyModel.find()
+            .sort({createdAt : 'descending'})
+            .lean()
+            .limit(resultsPerPage)
+            .skip(page * resultsPerPage);
+
+        if(propertyDetails.length <= 0){
+            res.status(400).json({
+                result : "Properties not found" 
+            });
+        }
+        res.status(200).json({
+            result : propertyDetails,
+            totalResults,
+            resultsPerPage : parseInt(resultsPerPage),
+        });
+        
+    } catch (error) {
+        next(error);
+    }
 };
 
-const createProperties = async ()=>{
-    // const {
-    //     description, 
-    //     propertyType, 
-    //     size, 
-    //     beds, 
-    //     bathrooms, 
-    //     serviceCharges, 
-    //     availableFrom, 
-    //     location, 
-    //     amenities, 
-    //     images, 
-    //     price, 
-    //     completeionStatus, 
-    //     propertyTag } = req.body;
+const getPropertiesById = async (req, res, next)=>{
+    const { id } = req.params;
+    
+    if(!id) {
+        res.status(400).json({
+            message : "Property id is required"
+        });
+    }
+    
+    try {
+        const propertyDetails = await PropertyModel.findById( id );
+        if( propertyDetails ){
+            res.status(200).json({
+                result : propertyDetails,
+            })
+        }
+    } catch (error) {
+        next(error);
+    }
 };
 
-const updateProperties = async ()=>{
-    
+const createProperties = async (req, res, next)=>{
+    const { ...propertyDetails } = req.body;
+
+    try {
+        const newProperty = await PropertyModel.create(propertyDetails);
+        if(newProperty){
+            res.status(200).json({
+                message : "Property created successfully"
+            });
+        }
+    } catch (error) {
+        next(error);
+    }
+
 };
 
-const deleteProperties = async ()=>{
+const updateProperties = async (req, res, next)=>{
+    const {id} = req.params;
+    const { ...propertyDetails } = req.body;
     
+    if(!id) {
+        res.status(400).json({
+            message : "Property id is required"
+        });
+    }
+    
+    try {
+        const newProperty = await PropertyModel.findByIdAndUpdate( id , propertyDetails );
+        if(newProperty){
+            res.status(200).json({
+                message : "Property updated successfully"
+            });
+        }
+    } catch (error) {
+        next(error);
+    }
+};
+
+const deleteProperties = async (req, res, next)=>{
+    const { id } = req.params;
+    
+    if(!id) {
+        res.status(400).json({
+            message : "Property id is required"
+        });
+    }
+
+    try {
+        await PropertyModel.findByIdAndDelete( id );
+        
+        res.status(200).json({
+            message : "Property deleted."
+        });
+    } catch (error) {
+        next(error);
+    }
 };
 
 module.exports = {
+    getPropertiesById, 
+    getAllProperties,
     createPropertyTypes,
     createAmenities,
-    getProperties, 
     createProperties,
     updateProperties, 
     deleteProperties, 

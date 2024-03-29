@@ -3,9 +3,10 @@ const router = express.Router();
 const { checkAuth } = require("../middleware/checkAuth");
 const { checkAdmin } = require("../middleware/checkAdmin");
 const { 
+    getPropertiesById,
+    getAllProperties,
     createPropertyTypes,
     createAmenities,
-    getProperties,
     createProperties,
     updateProperties,
     deleteProperties,
@@ -23,9 +24,10 @@ router.post("/amenities/create" , checkAuth, checkAdmin, createAmenities);
 
 
 // Properties
-router.get("/" , getProperties);
+router.get("/" , getAllProperties);
+router.get("/:id" , getPropertiesById);
 router.post("/create" , checkAuth, checkAdmin, createProperties);
-router.post("/update" , checkAuth, checkAdmin, updateProperties);
+router.post("/update/:id" , checkAuth, checkAdmin, updateProperties);
 router.post("/delete/:id" , checkAuth, checkAdmin, deleteProperties);
 
 module.exports = router;
