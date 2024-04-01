@@ -4,6 +4,7 @@ const cors = require('cors');
 const authRoutes = require("./routes/authRoutes");
 const propertyRoutes = require("./routes/propertyRoutes");
 const userRoutes = require("./routes/userRoutes");
+const ErrorHandler = require("./middleware/ErrorHandler");
 
 const app = express();
 const PORT = process.env.PORT || 3050;
@@ -26,11 +27,12 @@ app.use("/property", propertyRoutes);
 app.use("/users", userRoutes);
 
 // Wildcard matching routes
-app.use("*", (err, req, res, next)=>{
-    res.status(500).json({
-        message : err.message
-    });
-})
+app.use("/*", (req, res, next)=>{
+    next(new Error(`This ${req.originalUrl} isn't on this server!`));
+});
+
+// Error Handler 
+app.use(ErrorHandler);
 
 // Start the server
 app.listen(PORT, () => {
