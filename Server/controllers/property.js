@@ -82,9 +82,19 @@ const getPropertiesById = async (req, res, next)=>{
 };
 
 const createProperties = async (req, res, next)=>{
-    const { ...propertyDetails } = req.body;
+    if (!req.files || req.files.length === 0) {
+        return res.status(400).json({
+            message : 'file upload failed'
+        });
+    }
 
     try {
+        const images = req.files.map(file => file.filename);
+        // convert amenities to ObjectId
+        const amenities =req.body.amenities.split(",").map(amenity => new mongoose.Types.ObjectId(amenity));
+        
+        const propertyDetails = { ...req.body, images, amenities } 
+
         const newProperty = await PropertyModel.create(propertyDetails);
         if(newProperty){
             res.status(200).json({
