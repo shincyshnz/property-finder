@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { PropertyModel } = require("../models/propertyModel");
+const { UserModel } = require("../models/userModel");
 
 const searchProperties = async (req, res, next) => {
     const { 
