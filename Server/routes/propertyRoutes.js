@@ -40,7 +40,7 @@ router.post("/amenities/create" , checkAuth, checkAdmin, createAmenities);
 router.get("/" , getAllProperties);
 router.get("/:id" , getPropertiesById);
 router.post("/create" , checkAuth, checkAdmin, upload.array('images',12), createProperties);
-router.post("/update/:id" , checkAuth, checkAdmin, updateProperties);
-router.post("/delete/:id" , checkAuth, checkAdmin, deleteProperties);
+router.put("/update/:id" , checkAuth, checkAdmin, updateProperties);
+router.delete("/delete/:id" , checkAuth, checkAdmin, deleteProperties);
 
 module.exports = router;
