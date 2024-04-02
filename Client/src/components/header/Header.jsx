@@ -11,13 +11,15 @@ const Header = () => {
     setShowLoginDropDown(prev=> !prev);
   };
   const handleClickFavorites = () => {};
+  const handleHoverLogin = () => {};
 
   return (
     <header>
-      <div className="flex justify-between items-center md:flex-wrap xl:flex-nowrap gap-4">
+      <div className="flex justify-between items-center md:flex-wrap xl:flex-nowrap xl:p-4 gap-4">
         {/* Logo */}
-        <div className="w-[110px] h-10 md:order-1 md:ml-2 xl:order-1">
+        <div className="md:order-1 md:ml-2 xl:order-1">
           <img
+          className="w-[150px] h-10 "
             src="https://www.propertyfinder.com/wp-content/themes/pf/images/logo-en.svg"
             alt="property finder logo"
           />
@@ -62,6 +64,7 @@ const Header = () => {
             classname="border border-brand-sea-100 rounded-lg font-medium text-sm"
             text="Log in"
             handleClick={handleClickLogin}
+            handleHover={handleHoverLogin}
           />
         </div>
 
