@@ -33,8 +33,8 @@ const createAmenities = async (req, res, next)=>{
 
 // ------------------ Handling Properties -------------------
 const getAllProperties = async (req, res, next)=>{
-    const resultsPerPage = process.env.RESULTS_PER_PAGE;
-    const { page } = req.query; // starts from 0
+    // const resultsPerPage = process.env.RESULTS_PER_PAGE;
+    const { page, limit : resultsPerPage } = req.query; // starts from 0
 
     try {
         const totalResults = await PropertyModel.find().count();
