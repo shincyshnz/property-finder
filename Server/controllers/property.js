@@ -112,16 +112,15 @@ const updateProperties = async (req, res, next)=>{
     const { ...propertyDetails } = req.body;
     
     if(!id) {
-        res.status(400).json({
-            message : "Property id is required"
-        });
+        throw new Error("Property id is required");
     }
     
     try {
-        const newProperty = await PropertyModel.findByIdAndUpdate( id , propertyDetails );
-        if(newProperty){
+        const updatedProperty = await PropertyModel.findByIdAndUpdate( id , propertyDetails, {new : true} );
+        if(updatedProperty){
             res.status(200).json({
-                message : "Property updated successfully"
+                result : updatedProperty,
+                message : "Property updated successfully",
             });
         }
     } catch (error) {
