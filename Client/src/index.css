@@ -3,7 +3,11 @@
 @tailwind utilities;
 
 @layer utilities {
+    li {
+      @apply list-none;
+    }
+    
     .flex-center {
       @apply flex justify-center items-center;
     }
-  }
+}
