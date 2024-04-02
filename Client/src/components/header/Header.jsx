@@ -24,7 +24,7 @@ const Header = () => {
         </div>
 
         {/* Navbar */}
-        <div className="w-full pt-1 md:order-2 md:bg-global-stone-25 xl:order-1 xl:bg-transparent">
+        <div className="text-[14px] w-full pt-1 md:order-2 md:bg-global-stone-25 xl:order-1 xl:bg-transparent">
           <nav>
             <ul className="flex items-center ml-2">
               {NAVBAR_LINKS.map((link) =>
