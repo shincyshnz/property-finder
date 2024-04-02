@@ -98,7 +98,7 @@ const searchProperties = async (req, res, next) => {
         aggregationPipeline.push(matchStage);
 
         const result = await PropertyModel.aggregate(aggregationPipeline);   
-        console.log(aggregationPipeline);  
+        // console.log(aggregationPipeline);  
 
         res.status(400).json({
             result, 
