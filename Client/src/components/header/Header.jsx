@@ -2,16 +2,11 @@ import React, { useState } from "react";
 import { IoIosHeartEmpty } from "react-icons/io";
 import Button from "../shared/Button";
 import { NAVBAR_LINKS } from "../../constants";
-import DropDown from "./DropDown";
-import LoginModal from "./LoginModal";
+import LoginDropDown from "./LoginDropDown";
+import ExploreDropDown from "./ExploreDropDown";
 
 const Header = () => {
-  const [showLoginDropDown, setShowLoginDropDown] = useState(false);
-  const handleClickLogin = () => {
-    setShowLoginDropDown(prev=> !prev);
-  };
   const handleClickFavorites = () => {};
-  const handleHoverLogin = () => {};
 
   return (
     <header>
@@ -32,7 +27,7 @@ const Header = () => {
               {NAVBAR_LINKS.map((link) =>
                 link.text === "Explore" ? (
                   <li className="py-4 px-3" key={link.id}>
-                    <DropDown />
+                    <ExploreDropDown />
                   </li>
                 ) : (
                   <li
@@ -52,7 +47,7 @@ const Header = () => {
           </nav>
         </div>
         
-        {/* Login and Favorite Button */}
+        {/* Favorite and Login Button */}
         <div className="flex-center gap-1 md:order-1 md:p-2 xl:order-1 xl:min-w-[250px]">
           <Button
             text={
@@ -60,15 +55,9 @@ const Header = () => {
             }
             handleClick={handleClickFavorites}
           />
-          <Button
-            classname="border border-brand-sea-100 rounded-lg font-medium text-sm"
-            text="Log in"
-            handleClick={handleClickLogin}
-            handleHover={handleHoverLogin}
-          />
+          <LoginDropDown />
         </div>
 
-        {showLoginDropDown && <LoginModal setShowLoginDropDown={setShowLoginDropDown} />}
       </div>
     </header>
   );

@@ -1,14 +1,14 @@
-import React from "react";
-import WithModal from "../shared/modalContainer";
 import { IoCloseOutline } from "react-icons/io5";
 import Button from "../shared/Button";
+import WithModal from "../shared/HOC/modalContainer";
 
 const LoginModal = ({ ...props }) => {
-  const { setShowLoginDropDown } = props;
+  const { setShowLoginModal } = props;
 
   const handleClose = () => {
-    setShowLoginDropDown(false);
+    setShowLoginModal(false);
   };
+  
   return (
     <div className="bg-white max-w-[960px] rounded-md">
       {/* Header */}
@@ -58,7 +58,7 @@ const LoginModal = ({ ...props }) => {
             classname="bg-blue-800 bg-opacity-80 text-white font-medium rounded-md w-[90%]"
             icons={
               <img
-                src="https://freesvg.org/img/1534129544.png"
+                src="https://www.svgrepo.com/download/183607/facebook.svg"
                 alt="login with google"
                 className="w-8 h-8 rounded-full bg-white p-1"
               />

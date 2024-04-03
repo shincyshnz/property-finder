@@ -2,16 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-    h1 {
-      @apply font-[350];
-    }
+@layer base {
+  h1 {
+    @apply font-[350];
+  }
 
-    li {
-      @apply list-none;
-    }
-    
-    .flex-center {
-      @apply flex justify-center items-center;
-    }
+  li {
+    @apply list-none;
+  }
+}
+
+@layer utilities {
+}
+
+@layer components {
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+
+  .drop-down-box { 
+    @apply absolute right-0 w-60 mt-4 origin-top-left bg-white divide-y divide-gray-100 rounded-md shadow-lg transition duration-300 z-10;
+  }
 }
