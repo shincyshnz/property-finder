@@ -3,13 +3,35 @@
 @tailwind utilities;
 
 @layer base {
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+  }
+  html {
+      margin:    0 auto;
+      /* max-width: 1200px; */
+  }
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 400;
+  }
+
+  section, header{
+      max-width: 1200px;
+  }
+  section{
+    padding-block: 4rem;
+    padding-inline: 3rem
+  }
   h1 {
-    @apply font-[350];
+    @apply font-[350] tracking-wider font-bold;
   }
 
   li {
     @apply list-none;
   }
+
 }
 
 @layer utilities {

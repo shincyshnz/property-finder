@@ -26,7 +26,10 @@ const LoginDropDown = ({ ...props }) => {
       />
 
       {show && (
-        <div className="drop-down-box right-0 text-md" onMouseLeave={()=>setShow(prev=> !prev)}>
+        <div
+          className="drop-down-box right-0 text-md"
+          onMouseLeave={() => setShow((prev) => !prev)}
+        >
           <div className="flex-center flex-col gap-3 p-4 max-w-[250px] text-center font-bold">
             <p className="text-xs font-light leading-normal">
               Sign in or register to sync your favorite properties across
@@ -43,17 +46,17 @@ const LoginDropDown = ({ ...props }) => {
           </div>
 
           <div className="divide-y divide-y-gray-100 w-full flex-col ml-2 text-[14px] gap-2 font-light">
-              <div className="w-full p-3">
+            <div className="w-full p-3">
               <a href="#">Contacted Properties (0)</a>
               <span> &gt; </span>
-              </div>
-            
-              <div className="w-full p-3">
+            </div>
+
+            <div className="w-full p-3">
               <a href="#">Saved Properties (0)</a>
               <span> &gt; </span>
             </div>
-           
-              <div className="w-full p-3">
+
+            <div className="w-full p-3">
               <a href="#">Saved Searches (0)</a>
               <span> &gt; </span>
             </div>
@@ -61,7 +64,12 @@ const LoginDropDown = ({ ...props }) => {
         </div>
       )}
 
-      {showLoginModal && <LoginModal setShowLoginModal={setShowLoginModal} />}
+      {showLoginModal && (
+        <LoginModal
+          ContainerClassName="fixed w-full py-5 flex-center bg-opacity-60 max-h-screen px-10 md:px-0 bg-slate-900 inset-0 z-40 overflow-hidden"
+          setShowLoginModal={setShowLoginModal}
+        />
+      )}
     </>
   );
 };
