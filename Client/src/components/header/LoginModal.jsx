@@ -3,24 +3,25 @@ import WithModal from "../shared/HOC/modalContainer";
 import LoginEmail from "./LoginEmail";
 import { useState } from "react";
 import { useError } from "../../customHooks/hooks";
+import LoginPassword from "./LoginPassword";
 
 const LoginModal = ({ ...props }) => {
   const { setShowLoginModal } = props;
-  const [email, setEmail] = useState('');
-  const {deleteError} = useError();
+  const [email, setEmail] = useState("");
+  const [showLoginPassword, setLoginPassword] = useState(false);
+  const { deleteError } = useError();
 
   const handleClose = () => {
-    deleteError('email');
+    deleteError("email");
+    setEmail("");
     setShowLoginModal(false);
   };
 
-  const handleContinue =(event)=>{
+  const handleContinue = (event) => {
     event.preventDefault();
+    setLoginPassword((prev) => !prev);
+  };
 
-    console.log(email);
-  }
-
- 
   return (
     <div className="bg-white max-w-[960px] rounded-md">
       {/* Header */}
@@ -34,7 +35,7 @@ const LoginModal = ({ ...props }) => {
         />
       </div>
       <hr />
-      <div className="flex-center w-full bg-global-grey1 bg-opacity-10">
+      <div className="flex-center items-stretch bg-global-grey1 bg-opacity-10">
         {/* Left Side */}
         <div className="flex-1">
           <div className="flex-col flex-center">
@@ -53,10 +54,24 @@ const LoginModal = ({ ...props }) => {
         </div>
 
         {/* Right Side */}
-        <LoginEmail 
-        setEmail={setEmail} 
-        handleContinue={handleContinue}
-        />
+        <div className="flex-1 flex-center flex-col gap-2 py-7 bg-white">
+          <form className="flex-1 flex-center flex-col gap-4">
+          {!showLoginPassword ? (
+            <LoginEmail setEmail={setEmail} handleContinue={handleContinue} />
+          ) : (
+            <LoginPassword email={email} />
+          )}
+          </form>
+          {/* Footer */}
+          <div className="flex-center px-5">
+            <p className="text-[12px] text-center text-gray-500 my-5">
+              By registering you accept our{" "}
+              <span className="text-color-blue">Terms & Conditions</span> and{" "}
+              <span className="text-color-blue">our privacy policy.</span>
+            </p>
+          </div>
+        </div>
+
       </div>
     </div>
   );
