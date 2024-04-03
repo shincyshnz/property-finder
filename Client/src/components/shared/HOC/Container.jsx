@@ -5,3 +5,14 @@ export const Container = ({ children, ContainerClassName = '' }) => {
         </div>
     )
 }
+
+// Define HOC
+const WithContainer = (WrappedComponent) => {
+    return (props) => (
+    <Container ContainerClassName={props.ContainerClassName}>
+        <WrappedComponent {...props} />
+      </Container>
+      );
+  };
+  
+  export default WithContainer;

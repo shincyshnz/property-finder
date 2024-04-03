@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import WithDropDown from "../shared/HOC/DropDownContainer";
 import Button from "../shared/Button";
 import LoginModal from "./LoginModal";
+import WithContainer from "../shared/HOC/Container";
 
 const LoginDropDown = ({ ...props }) => {
   const [show, setShow] = useState(false);
@@ -74,4 +74,4 @@ const LoginDropDown = ({ ...props }) => {
   );
 };
 
-export default WithDropDown(LoginDropDown);
+export default WithContainer(LoginDropDown);

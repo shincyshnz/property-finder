@@ -1,9 +1,9 @@
 import { IoCloseOutline } from "react-icons/io5";
-import WithModal from "../shared/HOC/modalContainer";
 import LoginEmail from "./LoginEmail";
 import { useState } from "react";
 import { useError } from "../../customHooks/hooks";
 import LoginPassword from "./LoginPassword";
+import WithContainer from "../shared/HOC/Container";
 
 const LoginModal = ({ ...props }) => {
   const { setShowLoginModal } = props;
@@ -77,4 +77,4 @@ const LoginModal = ({ ...props }) => {
   );
 };
 
-export default WithModal(LoginModal);
+export default WithContainer(LoginModal);

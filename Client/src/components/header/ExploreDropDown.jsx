@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import WithDropDown from "../shared/HOC/DropDownContainer";
+import WithContainer from "../shared/HOC/Container";
 
 const ExploreDropDown = () => {
   const [show, setShow] = useState(false);
@@ -65,4 +65,4 @@ const ExploreDropDown = () => {
   );
 };
 
-export default WithDropDown(ExploreDropDown);
+export default WithContainer(ExploreDropDown);
