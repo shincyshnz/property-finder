@@ -30,8 +30,8 @@ const ExploreDropDown = () => {
       {/* <!-- Dropdown menu --> */}
       {show && (
         <div
-          className="drop-down-box"
-          onMouseLeave={() => setShow(false)}
+          className="drop-down-box left-0"
+          onMouseLeave={() => setShow(prev=> !prev)}
         >
           <div className="py-1">
             <a

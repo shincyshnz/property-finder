@@ -21,6 +21,6 @@
   }
 
   .drop-down-box { 
-    @apply absolute right-0 w-60 py-4 origin-top-left bg-white divide-y divide-gray-100 rounded-md shadow-lg transition duration-300 z-10;
+    @apply absolute w-60 py-4 origin-top-left my-4 bg-white divide-y divide-gray-100 rounded-md shadow-lg transition duration-300 z-10;
   }
 }

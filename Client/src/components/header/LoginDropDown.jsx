@@ -26,7 +26,7 @@ const LoginDropDown = ({ ...props }) => {
       />
 
       {show && (
-        <div className="drop-down-box text-md">
+        <div className="drop-down-box right-0 text-md" onMouseLeave={()=>setShow(prev=> !prev)}>
           <div className="flex-center flex-col gap-3 p-4 max-w-[250px] text-center font-bold">
             <p className="text-xs font-light leading-normal">
               Sign in or register to sync your favorite properties across
