@@ -35,10 +35,10 @@ const LoginModal = ({ ...props }) => {
         />
       </div>
       <hr />
-      <div className="flex-center items-stretch bg-global-grey1 bg-opacity-10">
+      <div className="flex justify-center items-stretch content-center bg-global-grey1 bg-opacity-10">
         {/* Left Side */}
         <div className="flex-1">
-          <div className="flex-col flex-center">
+          <div className="flex-col flex-center my-auto h-full">
             <img
               className="w-40"
               src="https://www.propertyfinder.ae/static/icons/account-benefits.svg"
