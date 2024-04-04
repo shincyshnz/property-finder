@@ -4,16 +4,17 @@ import { useState } from "react";
 import { useError } from "../../customHooks/hooks";
 import LoginPassword from "./LoginPassword";
 import WithContainer from "../shared/HOC/Container";
+import axios from 'axios';
 
 const LoginModal = ({ ...props }) => {
   const { setShowLoginModal } = props;
-  const [email, setEmail] = useState("");
+  const [formData, setFormData] = useState({});
   const [showLoginPassword, setLoginPassword] = useState(false);
   const { deleteError } = useError();
 
   const handleClose = () => {
     deleteError("email");
-    setEmail("");
+    setFormData({});
     setShowLoginModal(false);
   };
 
@@ -21,6 +22,28 @@ const LoginModal = ({ ...props }) => {
     event.preventDefault();
     setLoginPassword((prev) => !prev);
   };
+
+  const handleSubmit = (event)=>{
+    event.preventDefault();
+
+    // Send Login credentials to DB
+    try {
+      console.log(formData);
+      const response = axios(`${import.meta.env.VITE_AUTH_URL}/login`,{
+        method : "POST",
+        withCredentials : true,
+        data : formData,
+      });
+
+      // Store Access Token in localstorage
+      if (response?.status === 200) {
+        console.log(response.data);
+        // storeToken(response.data.accessToken);
+      }
+    }catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className="bg-white max-w-[960px] rounded-md">
@@ -55,11 +78,11 @@ const LoginModal = ({ ...props }) => {
 
         {/* Right Side */}
         <div className="flex-1 flex-center flex-col gap-2 py-7 bg-white">
-          <form className="flex-1 flex-center flex-col gap-4">
+          <form className="flex-1 flex-center flex-col gap-4" onSubmit={handleSubmit}>
           {!showLoginPassword ? (
-            <LoginEmail setEmail={setEmail} handleContinue={handleContinue} />
+            <LoginEmail formData={formData} setFormData={setFormData} handleContinue={handleContinue} />
           ) : (
-            <LoginPassword email={email} />
+            <LoginPassword formData={formData} setFormData={setFormData} handleSubmit={handleSubmit} />
           )}
           </form>
           {/* Footer */}

@@ -9,8 +9,9 @@ const ErrorHandler = require("./middleware/ErrorHandler");
 const app = express();
 const PORT = process.env.PORT || 3050;
 app.use(cors({
-    origin : '*',
-    
+  origin : ["http://localhost","http://localhost:5173","http://localhost:5174"],
+    credentials:true,
+    credentials : true,
 }));
 
 // Connect to DB

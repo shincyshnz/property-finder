@@ -4,7 +4,7 @@ import Input from "../shared/Input";
 import { useError } from "../../customHooks/hooks";
 import ErrorMessage from "../shared/ErrorMessage";
 
-const LoginEmail = ({ setEmail, handleContinue }) => {
+const LoginEmail = ({ setFormData, formData, handleContinue }) => {
   const { customError, handleError, deleteError } = useError();
   const [isActive, setIsActive] = useState(false);
 
@@ -24,8 +24,10 @@ const LoginEmail = ({ setEmail, handleContinue }) => {
     if (!isValidEmail) {
       handleError("email", "Please enter a valid email");
     } else {
-      console.log(email);
-      setEmail(email);
+      setFormData(prev => ({
+        ...prev,
+        email,
+        }));
       setIsActive(true);
     }
   };

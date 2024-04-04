@@ -7,9 +7,9 @@ import CardsHorizontal from "../components/shared/CardsHorizontal";
 import { IMAGES, TABS_INVEST, TABS_RENT } from "../constants";
 import PropertyCards from "../components/shared/PropertyCards";
 import Button from "../components/shared/Button";
-import ImageSlider from "../components/shared/ImageSlider";
 
 const Home = () => {
+
   return (
     <>
       <Header />
@@ -142,7 +142,6 @@ const Home = () => {
           />
 
           <div>
-            <ImageSlider images = {IMAGES}/>
           </div>
 
         </section>
