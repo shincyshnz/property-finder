@@ -10,6 +10,7 @@
   }
   html {
       margin:    0 auto;
+      overflow-x: hidden;
       /* max-width: 1200px; */
   }
   body {
@@ -18,11 +19,12 @@
   }
 
   section, header{
+    margin:    0 auto;
       max-width: 1200px;
   }
   section{
     padding-block: 4rem;
-    padding-inline: 3rem
+    padding-inline: 3rem;
   }
   h1 {
     @apply font-[350] tracking-wider font-bold;
@@ -44,5 +46,9 @@
 
   .drop-down-box { 
     @apply absolute w-60 py-4 origin-top-left my-4 bg-white divide-y divide-gray-100 rounded-md shadow-lg transition duration-300 z-10;
+  }
+
+  .sub-gray-text{
+    @apply antialiased font-normal leading-relaxed text-gray-500
   }
 }

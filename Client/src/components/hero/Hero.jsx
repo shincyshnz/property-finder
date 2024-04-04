@@ -2,7 +2,7 @@ import React from "react";
 
 const Hero = () => {
   return (
-        <div className="w-screen max-h-[53vh] overflow-y-clip">
+        <div className="w-screen max-h-[85vh] lg:max-h-[65vh] overflow-y-clip">
           <video autoPlay muted controls="" loop className="object-fill w-full h-full max-h-[80vh] -z-10">
         <source
           src="https://www.propertyfinder.ae/static/videos/home-ae.mp4"
