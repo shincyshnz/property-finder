@@ -27,7 +27,7 @@ const LoginDropDown = ({ ...props }) => {
 
       {show && (
         <div
-          className="drop-down-box right-0 text-md"
+          className="absolute drop-down-box right-1 text-md"
           onMouseLeave={() => setShow((prev) => !prev)}
         >
           <div className="flex-center flex-col gap-3 p-4 max-w-[250px] text-center font-bold">
@@ -45,18 +45,18 @@ const LoginDropDown = ({ ...props }) => {
             </a>
           </div>
 
-          <div className="divide-y divide-y-gray-100 w-full flex-col ml-2 text-[14px] gap-2 font-light">
-            <div className="w-full p-3">
+          <div className="divide-y divide-y-gray-100 w-full flex-col text-[14px] gap-2 font-light">
+            <div className="w-full py-3 px-4">
               <a href="#">Contacted Properties (0)</a>
               <span> &gt; </span>
             </div>
 
-            <div className="w-full p-3">
+            <div className="w-full py-3 px-4">
               <a href="#">Saved Properties (0)</a>
               <span> &gt; </span>
             </div>
 
-            <div className="w-full p-3">
+            <div className="w-full py-3 px-4">
               <a href="#">Saved Searches (0)</a>
               <span> &gt; </span>
             </div>

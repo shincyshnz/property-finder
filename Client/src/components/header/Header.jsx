@@ -10,7 +10,7 @@ const Header = () => {
 
   return (
     <header className="mx-auto">
-      <div className="flex justify-between items-center xl:p-3 md:flex-wrap md:gap-0 xl:flex-nowrap gap-4">
+      <div className="flex justify-between items-center xl:p-3 md:flex-wrap md:gap-0 xl:flex-nowrap">
         {/* Logo */}
         <div className="md:order-1 xl:order-1 py-3">
           <img
@@ -48,7 +48,7 @@ const Header = () => {
         </div>
         
         {/* Favorite and Login Button */}
-        <div className="flex-center gap-1 md:mr-2 md:order-1 md:p-2 xl:order-1 xl:min-w-[250px]">
+        <div className="relative flex justify-end items-center gap-1 md:order-1 md:p-2 xl:order-1 xl:min-w-[250px]">
           <Button
             text={
               <IoIosHeartEmpty size={"24px"} className="text-brand-sea-100" />
