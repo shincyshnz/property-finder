@@ -30,7 +30,7 @@ const Tabs = ({ children }) => {
       <div className="py-4">
         {React.Children.map(children, (child) => {
           if (child.props.label === activeTab) {
-            return <div key={child.props.label}>{child.props.children}</div>;
+            return <div key={child.props.label}  className={"lg:grid lg:grid-cols-2 lg:gap-3"}>{child.props.children}</div>;
           }
           return null;
         })}
@@ -41,7 +41,7 @@ const Tabs = ({ children }) => {
 
 const Tab = ({ label, children }) => {
   return (
-    <div label={label} className="hidden">
+    <div label={label}  className="hidden">
       {children}
     </div>
   );

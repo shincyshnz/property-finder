@@ -4,12 +4,12 @@ const CardsHorizontal = ({ ...props }) => {
     const {title, subText, linkText, link, imgUrl, bgColor} = props;
 
   return (
-    <div className="relative flex bg-clip-border rounded-xl bg-white shadow-global-grey2 shadow-lg w-full mb-7">
+    <div className="relative flex flex-row w-full bg-clip-border rounded-xl bg-white shadow-global-grey2 shadow-lg mb-7">
       <div className={`${bgColor} relative w-2/6 m-0 overflow-hidden bg-opacity-55 rounded-r-none bg-clip-border rounded-xl shrink-0`}>
         <img
           src={imgUrl}
           alt="card-image"
-          className="object-contain mx-auto my-8"
+          className="object-contain mx-auto my-8 lg:p-3"
         />
       </div>
       <div className="py-2 px-5">
