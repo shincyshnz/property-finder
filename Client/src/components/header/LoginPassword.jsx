@@ -2,9 +2,14 @@ import React, { useEffect, useState } from "react";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import Input from "../shared/Input";
 import Button from "../shared/Button";
+import ErrorMessage from "../shared/ErrorMessage";
+import { useError } from "../../customHooks/hooks";
 
 const LoginPassword = ({ formData, setFormData }) => {
+  const {customError, deleteError} = useError(); 
+
   const handleChangePassword = (event) => {
+    deleteError("password");
     const { value } = event.target;
 
     if(!value) return;
@@ -14,7 +19,7 @@ const LoginPassword = ({ formData, setFormData }) => {
       password : value,
       }));
   };
-
+  
   return (
     <>
       <div className="self-start text-color-blue flex items-center gap-2 ml-3 p-2">
@@ -36,6 +41,7 @@ const LoginPassword = ({ formData, setFormData }) => {
         className={`p-3 w-[90%] border border-1 border-global-grey2 rounded-md focus:outline-none`}
         onChange={handleChangePassword}
       />
+      {customError?.password && <ErrorMessage errorMsg={customError.password} />}
       <Button
         text="Submit"
         type="submit"

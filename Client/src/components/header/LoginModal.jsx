@@ -1,21 +1,22 @@
 import { IoCloseOutline } from "react-icons/io5";
 import LoginEmail from "./LoginEmail";
 import { useState } from "react";
-import { useError } from "../../customHooks/hooks";
+import { useAuth, useError } from "../../customHooks/hooks";
 import LoginPassword from "./LoginPassword";
 import WithContainer from "../shared/HOC/Container";
-import axios from 'axios';
+import axios from "axios";
 
 const LoginModal = ({ ...props }) => {
   const { setShowLoginModal } = props;
   const [formData, setFormData] = useState({});
   const [showLoginPassword, setLoginPassword] = useState(false);
-  const { deleteError } = useError();
+  const { deleteError, handleError } = useError();
+  const { handleUserData } = useAuth();
 
   const handleClose = () => {
     deleteError("email");
     setFormData({});
-    setShowLoginModal(false);
+    setShowLoginModal("");
   };
 
   const handleContinue = (event) => {
@@ -23,27 +24,47 @@ const LoginModal = ({ ...props }) => {
     setLoginPassword((prev) => !prev);
   };
 
-  const handleSubmit = (event)=>{
+  const Login = async(formdata)=>{
+     ///// Login
+     const response = await axios(`${import.meta.env.VITE_AUTH_URL}/login`, {
+      method: "POST",
+      withCredentials: true,
+      data: formData,
+    });
+
+    // Store Access Token in localstorage and set userdata in Auth context
+    if (response?.status === 200) {
+      localStorage.setItem("accessToken", response.data.token);
+      handleUserData(response.data.userData);
+    }
+  }
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     // Send Login credentials to DB
     try {
-      console.log(formData);
-      const response = axios(`${import.meta.env.VITE_AUTH_URL}/login`,{
-        method : "POST",
-        withCredentials : true,
-        data : formData,
-      });
+      if (setShowLoginModal === "login") {
+        Login(formData);
+      } else {
+        ///// Register
+        const response = await axios(`${import.meta.env.VITE_AUTH_URL}/register`, {
+          method: "POST",
+          data: formData,
+        });
 
-      // Store Access Token in localstorage
-      if (response?.status === 200) {
-        console.log(response.data);
-        // storeToken(response.data.accessToken);
+        // 
+        if (response?.status === 200) {
+          Login(formData);
+        }
       }
-    }catch (error) {
-      console.log(error);
+
+      // close Login modal
+      handleClose();
+    } catch (error) {
+      handleError("password", error.response.data.message || error.message);
     }
-  }
+  };
 
   return (
     <div className="bg-white max-w-[960px] rounded-md">
@@ -57,7 +78,10 @@ const LoginModal = ({ ...props }) => {
           onClick={handleClose}
         />
       </div>
+
       <hr />
+
+      {/* Body */}
       <div className="flex justify-center items-stretch content-center bg-global-grey1 bg-opacity-10">
         {/* Left Side */}
         <div className="flex-1">
@@ -78,12 +102,19 @@ const LoginModal = ({ ...props }) => {
 
         {/* Right Side */}
         <div className="flex-1 flex-center flex-col gap-2 py-7 bg-white">
-          <form className="flex-1 flex-center flex-col gap-4" onSubmit={handleSubmit}>
-          {!showLoginPassword ? (
-            <LoginEmail formData={formData} setFormData={setFormData} handleContinue={handleContinue} />
-          ) : (
-            <LoginPassword formData={formData} setFormData={setFormData} handleSubmit={handleSubmit} />
-          )}
+          <form
+            className="flex-1 flex-center flex-col gap-4"
+            onSubmit={handleSubmit}
+          >
+            {!showLoginPassword ? (
+              <LoginEmail
+                formData={formData}
+                setFormData={setFormData}
+                handleContinue={handleContinue}
+              />
+            ) : (
+              <LoginPassword formData={formData} setFormData={setFormData} />
+            )}
           </form>
           {/* Footer */}
           <div className="flex-center px-5">
@@ -94,7 +125,6 @@ const LoginModal = ({ ...props }) => {
             </p>
           </div>
         </div>
-
       </div>
     </div>
   );

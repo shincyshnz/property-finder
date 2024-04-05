@@ -8,23 +8,23 @@ const { generateAccessToken } = require("../utils/jwt");
 
 // Register User
 const register = async (req, res, next) => {
-  const { firstName, lastName, email, password, role } = req.body;
+  const { email, password, role } = req.body;
 
   try {
     let regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}");
-    if(!regex.test(email)){
-        throw new Error("Invalid Email address");
+    if (!regex.test(email)) {
+      throw new Error("Invalid Email address");
     }
 
-    const isEmailExists = await UserModel.findOne({email});
-    if(isEmailExists) {
-        throw new Error("Email Already exists. Please Login.")
+    const isEmailExists = await UserModel.findOne({ email });
+    if (isEmailExists) {
+      throw new Error("Email Already exists. Please Login.");
     }
 
     const hashedPassword = await generatePasswordHash(password);
     const newUser = await UserModel.create({
-      firstName,
-      lastName,
+      firstName : email.split('@')[0],
+      lastName : "",
       email,
       password: hashedPassword,
       role,
@@ -57,13 +57,21 @@ const login = async (req, res, next) => {
 
     if (!passwordMatch) {
       res.status(401).json({
-        message: "Incorrect email/passsword",
+        message: "Wrong passsword. Try again or Reset",
       });
     }
 
     // Generate JWT Token
     const token = generateAccessToken(user._id);
-    res.status(200).json({ token });
+
+    // remove password from result;
+    const userData = { ...user._doc };
+    delete userData.password;
+
+    res.status(200).json({
+      token,
+      userData,
+    });
   } catch (error) {
     next(error);
   }

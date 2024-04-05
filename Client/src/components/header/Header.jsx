@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoIosHeartEmpty } from "react-icons/io";
 import Button from "../shared/Button";
 import { NAVBAR_LINKS } from "../../constants";
@@ -55,6 +55,7 @@ const Header = () => {
             }
             handleClick={handleClickFavorites}
           />
+
           <LoginDropDown />
         </div>
 
