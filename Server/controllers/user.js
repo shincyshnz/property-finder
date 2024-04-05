@@ -11,6 +11,7 @@ const searchProperties = async (req, res, next) => {
         bth : baths,
         pr1 : price1,
         pr2 : price2,
+        perPage
     } = req.query;
 
     try {
@@ -58,9 +59,13 @@ const searchProperties = async (req, res, next) => {
         let matchStage = {
             $match: {
                 $and: [
-                    { propertyTag: propertyTag }
+                    // { propertyTag: propertyTag }
                 ]
-            }
+            },
+        };
+
+        let limitStage = {
+            $limit: parseInt(perPage),
         };
         
         // Add optional matches based on conditions
@@ -71,6 +76,10 @@ const searchProperties = async (req, res, next) => {
                     { building: searchString }
                 ]
             });
+        }
+
+        if (propertyTag) {
+            matchStage.$match.$and.push({ propertyTag: propertyTag });
         }
         
         if (propertyType) {
@@ -97,11 +106,12 @@ const searchProperties = async (req, res, next) => {
         }
         
         aggregationPipeline.push(matchStage);
+        aggregationPipeline.push(limitStage);
 
         const result = await PropertyModel.aggregate(aggregationPipeline);   
         // console.log(aggregationPipeline);  
 
-        res.status(400).json({
+        res.status(200).json({
             result, 
         });
     } catch (error) {

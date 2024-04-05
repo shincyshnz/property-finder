@@ -4,12 +4,11 @@ import Hero from "../components/hero/Hero";
 import Title from "../components/shared/Title";
 import { Tab, Tabs } from "../components/shared/Tabs";
 import CardsHorizontal from "../components/shared/CardsHorizontal";
-import { IMAGES, TABS_INVEST, TABS_RENT } from "../constants";
-import PropertyCards from "../components/shared/PropertyCards";
+import { TABS_INVEST, TABS_RENT } from "../constants";
 import Button from "../components/shared/Button";
+import PropertyCardsContainer from "../components/PropertyCardsContainer";
 
 const Home = () => {
-
   return (
     <>
       <Header />
@@ -97,29 +96,9 @@ const Home = () => {
           text="Explore new projects in the UAE"
           subText="Discover the latest off-plan properties and be informed."
         />
-
         <Tabs>
           <Tab label="Dubai">
-            <div className="grid grid-cols-2 xl:grid-cols-3  gap-5">
-              <div className="">
-                <PropertyCards />
-              </div>
-              <div className="">
-                <PropertyCards />
-              </div>
-              <div className="">
-                <PropertyCards />
-              </div>
-              <div className="">
-                <PropertyCards />
-              </div>
-              <div className="">
-                <PropertyCards />
-              </div>
-              <div className="">
-                <PropertyCards />
-              </div>
-            </div>
+            <PropertyCardsContainer label="Dubai" />
           </Tab>
           <Tab label="Abu Dhabi"></Tab>
           <Tab label="Sharjah"></Tab>
@@ -141,9 +120,7 @@ const Home = () => {
             subText="Dive deep into the UAE’s real estate market with prices, transaction histories and community insights to help you make an educated decision."
           />
 
-          <div>
-          </div>
-
+          <div></div>
         </section>
       </div>
     </>

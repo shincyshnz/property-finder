@@ -52,9 +52,9 @@ const propertySchema = new mongoose.Schema({
         type : String, 
     }],
     price :{
-        type : mongoose.Types.Decimal128,
+        type : String,
     },
-    completeionStatus : {
+    completionStatus : {
         type : String,
         trim : true,
     },
