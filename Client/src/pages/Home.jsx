@@ -6,7 +6,7 @@ import { Tab, Tabs } from "../components/shared/Tabs";
 import CardsHorizontal from "../components/shared/CardsHorizontal";
 import { TABS_INVEST, TABS_RENT } from "../constants";
 import Button from "../components/shared/Button";
-import PropertyCardsContainer from "../components/PropertyCardsContainer";
+import PropertyCardsContainer from "../components/properties/PropertyCardsContainer";
 
 const Home = () => {
   return (

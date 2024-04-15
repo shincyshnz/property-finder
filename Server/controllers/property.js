@@ -89,7 +89,7 @@ const createProperties = async (req, res, next)=>{
     }
 
     try {
-        const images = req.files.map(file => file.filename);
+        const images = req.files.map(file => `http://localhost:3005/${file.filename}`);
         // convert amenities to ObjectId
         const amenities =req.body.amenities.split(",").map(amenity => new mongoose.Types.ObjectId(amenity));
         

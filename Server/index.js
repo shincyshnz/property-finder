@@ -19,6 +19,8 @@ connectDb();
 
 // Parse JSON request body
 app.use(express.json());
+// make images accessible from outside
+app.use(express.static('assets/uploads'));
 
 // authentication routes
 app.use("/auth", authRoutes);

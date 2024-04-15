@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import PropertyCards from "./shared/PropertyCards";
+import PropertyCards from "../shared/PropertyCards";
 import axios from "axios";
 
 const PropertyCardsContainer = ({ label = "Dubai" }) => {
@@ -31,7 +31,7 @@ const PropertyCardsContainer = ({ label = "Dubai" }) => {
   console.log(propertiesData, "==propertiesData");
 
   return (
-    <div className="grid grid-cols-2 xl:grid-cols-3 gap-5">
+    <div className="grid grid-cols-2 gap-3 grid-flow-col content-between xl:grid-cols-3">
         <PropertyCards propertyData={propertiesData} searchString={searchString}/>
     </div>
   );
